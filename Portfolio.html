@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محمد المسالمه | Portfolio</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f172a',
+                        card: '#1e293b',
+                        accent1: '#38bdf8',
+                        accent2: '#818cf8',
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        .en-text {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Glassmorphism */
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typing Effect Cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: #38bdf8;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Project Filtering Transitions */
+        .project-card {
+            transition: all 0.5s ease;
+        }
+        .project-card.hide {
+            display: none;
+        }
+        .project-card.show {
+            animation: fadeInScale 0.6s forwards;
+        }
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #818cf8; }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent1 selection:text-dark">
+
+    <nav class="glass-nav fixed w-full top-0 z-50 transition-all duration-300 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-accent1 to-accent2">
+                Eng.Mohamad Al masalmah
+            </a>
+            
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex gap-8 items-center text-sm font-semibold text-gray-300">
+                <li><a href="#about" class="hover:text-accent1 transition-colors duration-300">من أنا</a></li>
+                <li><a href="#skills" class="hover:text-accent1 transition-colors duration-300">مهاراتي</a></li>
+                <li><a href="#projects" class="hover:text-accent1 transition-colors duration-300">أعمالي</a></li>
+                <li><a href="#contact" class="px-5 py-2 rounded-full bg-gradient-to-r from-accent1 to-accent2 text-white hover:shadow-lg hover:shadow-accent1/30 transition-all duration-300">تواصل معي</a></li>
+            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-gray-300 hover:text-accent1 focus:outline-none" id="mobile-menu-btn">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="md:hidden hidden absolute top-full left-0 w-full glass-nav flex-col text-center py-4 gap-4" id="mobile-menu">
+            <a href="#about" class="block text-gray-300 hover:text-accent1">من أنا</a>
+            <a href="#skills" class="block text-gray-300 hover:text-accent1">مهاراتي</a>
+            <a href="#projects" class="block text-gray-300 hover:text-accent1">أعمالي</a>
+            <a href="#contact" class="block text-accent1 font-bold">تواصل معي</a>
+        </div>
+    </nav>
+
+    <header id="home" class="min-h-screen flex items-center justify-center relative pt-20 overflow-hidden">
+        <!-- Background decorative blobs -->
+        <div class="absolute top-20 -right-20 w-72 h-72 bg-accent1 rounded-full mix-blend-multiply filter blur-[100px] opacity-20"></div>
+        <div class="absolute bottom-20 -left-20 w-72 h-72 bg-accent2 rounded-full mix-blend-multiply filter blur-[100px] opacity-20"></div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
+            
+            <!-- قسم الصورة الشخصية الجديد -->
+            <div class="relative reveal mb-6">
+                <!-- إطار متدرج مع توهج -->
+                <div class="w-40 h-40 md:w-48 md:h-48 rounded-full p-1 bg-gradient-to-r from-accent1 to-accent2 shadow-[0_0_30px_rgba(56,189,248,0.3)] hover:scale-105 transition-transform duration-500">
+                    <!-- مسار الصورة -->
+                    <img src="photo_2026-09-30_16-17-06.jpg" alt="محمد المسالمه" class="w-full h-full object-cover rounded-full border-4 border-dark">
+                </div>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 reveal" style="transition-delay: 0.1s;">
+                مرحباً، أنا <span class="bg-clip-text text-transparent bg-gradient-to-r from-accent1 to-accent2">المهندس محمد المسالمه</span> 👋
+            </h1>
+            <h2 class="text-xl md:text-3xl text-gray-400 mb-8 h-10 reveal" style="transition-delay: 0.2s;">
+                <span id="typing-text" class="typing-cursor font-medium"></span>
+            </h2>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 reveal" style="transition-delay: 0.3s;">
+                <a href="#projects" class="px-8 py-3 rounded-full bg-gradient-to-r from-accent1 to-accent2 text-white font-bold hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:-translate-y-1 transition-all duration-300">
+                    <i class="fas fa-briefcase ml-2"></i>شاهد أعمالي
+                </a>
+                <a href="Mohamasmas_cv.pdf" download="Mohamad_Almasalmah_CV.pdf" class="px-8 py-3 rounded-full border border-gray-600 hover:border-accent2 text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center justify-center">
+                    <i class="fas fa-download ml-2"></i>تحميل السيرة الذاتية
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-24 bg-slate-900/50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 inline-block relative">
+                    من <span class="text-accent1">أنا</span>
+                    <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1/2 h-1 bg-gradient-to-r from-accent1 to-accent2 rounded-full"></div>
+                </h2>
+                <p class="text-lg text-gray-400 leading-relaxed mt-8 font-medium">
+                    طالب سنة خامسة في كلية الهندسة المعلوماتية متخصص في الذكاء الاصطناعي بجامعة دمشق. 
+                    أهتم ببناء تطبيقات وأنظمة متكاملة تجمع بين واجهات المستخدم التفاعلية، الخوارزميات المعقدة، 
+                    وتقنيات المعالجة اللحظية. أسعى دائماً لتحويل الأفكار المعقدة 
+                    إلى حلول برمجية سلسة وفعالة.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold inline-block relative">
+                    المهارات <span class="text-accent2">التقنية</span>
+                    <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1/2 h-1 bg-gradient-to-r from-accent1 to-accent2 rounded-full"></div>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Skill Card 1 -->
+                <div class="glass-card rounded-2xl p-6 hover:-translate-y-2 transition-transform duration-300 reveal group">
+                    <div class="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-accent1/20 transition-colors">
+                        <i class="fas fa-mobile-alt text-2xl text-accent1"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">تطوير الموبايل</h3>
+                    <p class="text-gray-400 en-text">Flutter, Dart, Riverpod</p>
+                </div>
+
+                <!-- Skill Card 2 (تم التعديل هنا) -->
+                <div class="glass-card rounded-2xl p-6 hover:-translate-y-2 transition-transform duration-300 reveal group" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center mb-4 group-hover:bg-accent2/20 transition-colors">
+                        <i class="fas fa-server text-2xl text-accent2"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">لغات البرمجة والويب</h3>
+                    <p class="text-gray-400 en-text leading-relaxed">Python, Java, C++, HTML, CSS, JavaScript</p>
+                </div>
+
+                <!-- Skill Card 3 -->
+                <div class="glass-card rounded-2xl p-6 hover:-translate-y-2 transition-transform duration-300 reveal group" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 rounded-full bg-sky-500/10 flex items-center justify-center mb-4 group-hover:bg-accent1/20 transition-colors">
+                        <i class="fas fa-cube text-2xl text-accent1"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">المحاكاة والـ 3D</h3>
+                    <p class="text-gray-400 en-text">Three.js, Unity</p>
+                </div>
+
+                <!-- Skill Card 4 -->
+                <div class="glass-card rounded-2xl p-6 hover:-translate-y-2 transition-transform duration-300 reveal group" style="transition-delay: 0.3s;">
+                    <div class="w-14 h-14 rounded-full bg-indigo-500/10 flex items-center justify-center mb-4 group-hover:bg-accent2/20 transition-colors">
+                        <i class="fas fa-network-wired text-2xl text-accent2"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">أنظمة وأدوات</h3>
+                    <p class="text-gray-400 en-text text-sm">WebSockets, RTSP, Docker, Git, Linux</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-slate-900/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold inline-block relative">
+                    أبرز <span class="text-accent1">المشاريع</span>
+                    <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1/2 h-1 bg-gradient-to-r from-accent1 to-accent2 rounded-full"></div>
+                </h2>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+                <button class="filter-btn active px-6 py-2 rounded-full bg-accent1 text-dark font-bold transition-all" data-filter="all">الكل</button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-transparent border border-gray-600 hover:border-accent1 text-gray-300 transition-all" data-filter="mobile">تطبيقات موبايل</button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-transparent border border-gray-600 hover:border-accent1 text-gray-300 transition-all" data-filter="ai">ذكاء اصطناعي</button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-transparent border border-gray-600 hover:border-accent1 text-gray-300 transition-all" data-filter="sim3d">محاكاة 3D</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                
+                <!-- Project: MyHalaqat -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group show reveal" data-category="mobile">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://placehold.co/600x400/1e293b/38bdf8?text=MyHalaqat" alt="MyHalaqat" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10 -mt-10">
+                        <span class="text-xs font-bold px-3 py-1 bg-accent1/20 text-accent1 rounded-full mb-3 inline-block">تطبيق موبايل</span>
+                        <h3 class="text-xl font-bold mb-2">تطبيق حلقاتي (MyHalaqat)</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">تطبيق لإدارة حلقات تحفيظ القرآن. يدعم العمل دون إنترنت (Offline-First) مع مزامنة خلفية.</p>
+                        <div class="flex flex-wrap gap-2 text-xs en-text text-gray-500">
+                            <span class="bg-gray-800 px-2 py-1 rounded">Flutter</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">SQLite</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">Workmanager</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 1 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group show reveal" data-category="mobile">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://placehold.co/600x400/1e293b/38bdf8?text=Digital+Guard" alt="Digital Guard" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10 -mt-10">
+                        <span class="text-xs font-bold px-3 py-1 bg-accent1/20 text-accent1 rounded-full mb-3 inline-block">تطبيق موبايل</span>
+                        <h3 class="text-xl font-bold mb-2">Digital Guard</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">تطبيق موبايل لإدارة الحماية وأنظمة المراقبة في الوقت الفعلي.</p>
+                        <div class="flex flex-wrap gap-2 text-xs en-text text-gray-500">
+                            <span class="bg-gray-800 px-2 py-1 rounded">Flutter</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">Riverpod</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">RTSP</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">WebSockets</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group show reveal" data-category="ai">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://placehold.co/600x400/1e293b/818cf8?text=Senet+AI" alt="Senet Game AI" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10 -mt-10">
+                        <span class="text-xs font-bold px-3 py-1 bg-accent2/20 text-accent2 rounded-full mb-3 inline-block">ذكاء اصطناعي</span>
+                        <h3 class="text-xl font-bold mb-2">لعبة Senet</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">محرك ذكاء اصطناعي للعبة باستخدام خوارزمية Expectiminmax.</p>
+                        <div class="flex flex-wrap gap-2 text-xs en-text text-gray-500">
+                            <span class="bg-gray-800 px-2 py-1 rounded">Python</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">AI Algorithms</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group show reveal" data-category="mobile">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://placehold.co/600x400/1e293b/38bdf8?text=GoSwift+%26+Capsula" alt="GoSwift & Capsula" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10 -mt-10">
+                        <span class="text-xs font-bold px-3 py-1 bg-accent1/20 text-accent1 rounded-full mb-3 inline-block">تطبيق موبايل</span>
+                        <h3 class="text-xl font-bold mb-2">GoSwift & Capsula</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">تطبيقات توصيل وإدارة صيدليات بواجهات مستخدم احترافية وسلسة.</p>
+                        <div class="flex flex-wrap gap-2 text-xs en-text text-gray-500">
+                            <span class="bg-gray-800 px-2 py-1 rounded">Flutter</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group show reveal" data-category="sim3d">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://placehold.co/600x400/1e293b/818cf8?text=Missile+Simulation" alt="Missile Simulation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10 -mt-10">
+                        <span class="text-xs font-bold px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full mb-3 inline-block">محاكاة 3D</span>
+                        <h3 class="text-xl font-bold mb-2">محاكاة إطلاق صاروخ</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">محاكاة ثلاثية الأبعاد لحسابات الفيزياء الميكانيكية وإطلاق الصواريخ.</p>
+                        <div class="flex flex-wrap gap-2 text-xs en-text text-gray-500">
+                            <span class="bg-gray-800 px-2 py-1 rounded">Three.js</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">Physics Math</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group show reveal" data-category="sim3d">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://placehold.co/600x400/1e293b/38bdf8?text=Fluid+%26+Pendulum" alt="Fluid & Pendulum" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10 -mt-10">
+                        <span class="text-xs font-bold px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full mb-3 inline-block">محاكاة 3D</span>
+                        <h3 class="text-xl font-bold mb-2">محاكاة البندول والموائع</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">تطبيق يحاكي الرسم، حركة السوائل، والفيزياء الكلاسيكية.</p>
+                        <div class="flex flex-wrap gap-2 text-xs en-text text-gray-500">
+                            <span class="bg-gray-800 px-2 py-1 rounded">Unity</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">C#</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group show reveal" data-category="ai">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://placehold.co/600x400/1e293b/818cf8?text=Lava+and+Aqua" alt="Lava and Aqua" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
+                    </div>
+                    <div class="p-6 relative z-10 -mt-10">
+                        <span class="text-xs font-bold px-3 py-1 bg-accent2/20 text-accent2 rounded-full mb-3 inline-block">ذكاء اصطناعي</span>
+                        <h3 class="text-xl font-bold mb-2">Lava and Aqua</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">مشروع لعبة تعتمد على اتخاذ القرارات الخوارزمية وتطبيق المفاهيم المعقدة.</p>
+                        <div class="flex flex-wrap gap-2 text-xs en-text text-gray-500">
+                            <span class="bg-gray-800 px-2 py-1 rounded">Python</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded">Algorithms</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold inline-block relative">
+                        تواصل <span class="text-accent2">معي</span>
+                        <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-1/2 h-1 bg-gradient-to-r from-accent1 to-accent2 rounded-full"></div>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Contact Info (تم التعديل هنا) -->
+                    <div class="reveal">
+                        <h3 class="text-2xl font-bold mb-6">دعنا نتحدث عن مشروعك القادم!</h3>
+                        <p class="text-gray-400 mb-8">أنا متاح دائماً لمناقشة أفكار جديدة، التعاون في مشاريع، أو حتى للحديث عن التكنولوجيا والذكاء الاصطناعي.</p>
+                        
+                        <div class="flex flex-col gap-4">
+                            <!-- Email -->
+                            <a href="mailto:mohamadmas261@gmail.com" class="flex items-center gap-4 text-gray-300 hover:text-accent1 transition-colors group">
+                                <div class="w-12 h-12 rounded-full glass-card flex items-center justify-center group-hover:bg-accent1/20 transition-all">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <span class="en-text font-medium">مراسلة عبر الإيميل</span>
+                            </a>
+                            <!-- WhatsApp -->
+                            <a href="https://wa.me/+963943914990" target="_blank" class="flex items-center gap-4 text-gray-300 hover:text-green-400 transition-colors group">
+                                <div class="w-12 h-12 rounded-full glass-card flex items-center justify-center group-hover:bg-green-400/20 transition-all">
+                                    <i class="fab fa-whatsapp text-xl"></i>
+                                </div>
+                                <span class="en-text font-medium">واتساب</span>
+                            </a>
+                            <!-- Telegram -->
+                            <a href="https://t.me/Mohamadmas_1" target="_blank" class="flex items-center gap-4 text-gray-300 hover:text-blue-400 transition-colors group">
+                                <div class="w-12 h-12 rounded-full glass-card flex items-center justify-center group-hover:bg-blue-400/20 transition-all">
+                                    <i class="fab fa-telegram-plane text-xl"></i>
+                                </div>
+                                <span class="en-text font-medium">تيلجرام</span>
+                            </a>
+                            <!-- GitHub -->
+                            <a href="https://github.com/mohamadmas261-collab" target="_blank" class="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group">
+                                <div class="w-12 h-12 rounded-full glass-card flex items-center justify-center group-hover:bg-gray-600 transition-all">
+                                    <i class="fab fa-github text-xl"></i>
+                                </div>
+                                <span class="en-text font-medium">حساب GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form (WhatsApp Integrated) -->
+                    <div class="glass-card p-8 rounded-2xl reveal" style="transition-delay: 0.2s;">
+                        <form onsubmit="sendWhatsAppMessage(event)">
+                            <div class="mb-4">
+                                <input id="senderName" type="text" placeholder="الاسم الكريم" class="w-full bg-slate-800/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent1 transition-colors" required>
+                            </div>
+                           
+                            <div class="mb-6">
+                                <textarea id="senderMessage" rows="4" placeholder="رسالتك..." class="w-full bg-slate-800/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent1 transition-colors resize-none" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3 rounded-lg bg-gradient-to-r from-accent1 to-accent2 text-white font-bold hover:shadow-lg hover:shadow-accent1/30 transition-all flex items-center justify-center gap-2">
+                                <i class="fab fa-whatsapp text-xl"></i> إرسال عبر واتساب
+                            </button>
+                            <p id="form-msg" class="text-green-400 text-sm mt-4 text-center hidden">جاري تحويلك إلى واتساب...</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (تم التعديل هنا) -->
+    <footer class="pb-10 pt-6 text-center relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="inline-block glass-card px-8 py-3 rounded-full border border-gray-700/50 shadow-lg">
+                <p class="text-gray-400 text-sm font-semibold tracking-wide">
+                    &copy; 2026 المهندس محمد المسالمه. جميع الحقوق محفوظة.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* 1. Typing Effect for Subtitle */
+            const text = "مهندس معلوماتية | مطور مواقع و تطبيقات موبايل | متخصص في الذكاء الاصطناعي";
+            const typingElement = document.getElementById('typing-text');
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    typingElement.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            setTimeout(typeWriter, 500);
+
+            /* 2. Mobile Menu Toggle */
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                });
+            });
+
+            /* 3. Smooth Scrolling for Anchor Links */
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            /* 4. Scroll Reveal Animation */
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            });
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            /* 5. Project Filtering with Smooth Transitions */
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-accent1', 'text-dark');
+                        b.classList.add('bg-transparent', 'text-gray-300');
+                    });
+                    btn.classList.add('bg-accent1', 'text-dark');
+                    btn.classList.remove('bg-transparent', 'text-gray-300');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    projectCards.forEach(card => {
+                        card.classList.remove('show', 'hide');
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.classList.add('show');
+                        } else {
+                            card.classList.add('hide');
+                        }
+                    });
+                });
+            });
+        });
+
+        /* 6. WhatsApp Integration */
+        function sendWhatsAppMessage(event) {
+            event.preventDefault(); 
+            
+            const name = document.getElementById('senderName').value;
+            const message = document.getElementById('senderMessage').value;
+            
+            const phoneNumber = "+963943914990"; 
+            
+            const text = `مرحباً مهندس محمد،%0Aأنا: ${name}%0Aرسالتي:%0A${message}`;
+            
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${text}`;
+            
+            const msg = document.getElementById('form-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => {
+                msg.classList.add('hidden');
+            }, 4000);
+            
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
